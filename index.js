@@ -7,6 +7,7 @@ const morgan = require('morgan')
 const fs = require('fs')
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
+app.use(express.static('./public'))
 
 // Get Port
 const args = require("minimist")(process.argv.slice(2));
@@ -105,15 +106,31 @@ app.get('/app/flips/:number', (req, res) => {
   res.status(200).json({'raw':flips,'summary' : count});
 });
 
-app.get('/app/flip/call/heads', (req,res) => {
-  res.contentType('text/json');
-  res.status(200).json(flipACoin('heads'));
-});
+app.post('/app/flip/coins/', (req, res, next) => {
+    const flips = coinFlips(req.body.number)
+    const count = countFlips(flips)
+    res.status(200).json({"raw":flips,"summary":count})
+})
 
-app.get('/app/flip/call/tails', (req,res) => {
-  res.contentType('text/json');
-  res.status(200).json(flipACoin('tails'));
-});
+app.post('/app/flip/call/', (req, res, next) => {
+    const game = flipACoin(req.body.guess)
+    res.status(200).json(game)
+})
+
+app.get('/app/flip/call/:guess(heads|tails)/', (req, res, next) => {
+    const game = flipACoin(req.params.guess)
+    res.status(200).json(game)
+})
+
+// app.get('/app/flip/call/heads', (req,res) => {
+//   res.contentType('text/json');
+//   res.status(200).json(flipACoin('heads'));
+// });
+
+// app.get('/app/flip/call/tails', (req,res) => {
+//   res.contentType('text/json');
+//   res.status(200).json(flipACoin('tails'));
+// });
 
 app.use(function(req,res) {
   res.status(404).end('Endpoint does not exist');
