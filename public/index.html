@@ -52,7 +52,6 @@
             <strong>Enter the number of flips:</strong>
           </label>
           <input type="number" name="number" id="number" />
-          <br>
           <input type="submit" value="Flip Coins!" />
       </form>
 
@@ -75,8 +74,8 @@
     <div id="guess" class="hidden">
       
       <h1>Guess the Result of the Flip!</h1>
-      <button id="headsbutton">Heads</button>
-      <button id="tailsbutton">Tails</button>
+      <button id="headsbutton" onclick="guessFlip('heads')">Heads</button>
+      <button id="tailsbutton" onclick="guessFlip('tails')">Tails</button>
 
       <h3>Your Results:</h3>
       <p id='call'></p>

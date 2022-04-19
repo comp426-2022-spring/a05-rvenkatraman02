@@ -63,6 +63,7 @@ function guessActive() {
     multi.classList.remove('active')
     multi.classList.add('hidden')
 }
+
 // Flip one coin and show coin image to match result when button clicked
 function coinFlip() {
     fetch('http://localhost:5000/app/flip/', {mode: 'cors'})
@@ -121,11 +122,42 @@ async function flipCoins(event) {
 
         document.getElementById("heads").innerHTML = "Heads: "+flips.summary.heads
         document.getElementById("tails").innerHTML = "Tails: "+flips.summary.tails
-        
+
     } catch (error) {
         console.log(error)
     }
 }
+
+// Guess a flip by clicking either heads or tails button
+
+// Our flip many coins form
+const guessflips = document.getElementById("headsbutton")
+// Add event listener for coins form
+guessflips.addEventListener("click", guessFlip)
+
+async function guessFlip(event) {
+    event.preventDefault();
+    
+    const endpoint = "app/flip/call/"
+    const url = document.baseURI+endpoint
+
+    const formEvent = event.currentTarget
+    
+    try {
+        const formData = new FormData(formEvent)
+        const flips = await sendFlips({ url, formData })
+
+        console.log(flips)
+        document.getElementById("call").innerHTML = "Your call: "+flips.call
+        document.getElementById("actual_flip").innerHTML = "Coin landed on: "+flips.flip
+        document.getElementById("coin_pic").setAttribute("src", "/public/assets/img/"+result.flip+".png")
+        document.getElementById("guess_result").innerHTML = "Result: "+flips.result
+    }
+    catch (error) {
+        console.log(error)
+    }
+}
+
 
 // Create a data sender
 async function sendFlips({ url, formData }) {
@@ -145,5 +177,3 @@ async function sendFlips({ url, formData }) {
     const response = await fetch(url, options);
     return response.json()
 }
-
-// Guess a flip by clicking either heads or tails button

@@ -13,7 +13,7 @@ app.use(express.static('./public'))
 
 // Get Port
 const args = require("minimist")(process.argv.slice(2));
-var port = args.port || 5555;
+var port = args.port || 5000;
 
 // Start an app server
 const server = app.listen(port, () => {
