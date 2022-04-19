@@ -86,13 +86,10 @@ if (debug === true) {
   })
 }
 
-app.get('/app/', (req,res) => {
-  // Respond with status 200
-      res.statusCode = 200;
-  // Respond with status message "OK"
-      res.statusMessage = 'OK';
-      res.writeHead(res.statusCode, {'Content-Type' : 'text/plain'});
-      res.end(res.statusCode+ ' ' +res.statusMessage);
+app.get('/app/', (req, res, next) => {
+  res.status(200).json({
+      'message': "Your API works! (200)"
+  })
 });
 
 // Endpoint definitions
