@@ -138,19 +138,26 @@ ETag: W...
 #### Request cURL
 
 ```
-
+curl http://localhost:5000/app/flip/coin
 ```
 
 #### Response body
 
 ```
-
+{"flip":"heads"}
 ```
 
 #### Response headers
 
 ```
-
+HTTP/1.1 200 OK
+Access-Control-Allow-Origin: *
+Connection: keep-alive
+Keep-Alive: timeout=5
+Content-Length: 16
+Content-Type: text/json; charset=utf-8
+Date: Tue, 19 Apr 2022 18:15:59 GMT
+ETag: W...
 ```
 
 ### /app/flip/call/:guess/ (GET)
