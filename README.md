@@ -261,7 +261,7 @@ Keep-Alive: timeout=5
 
 ```
 
-### /app/log/access/ (GET)
+### /app/error/ (GET)
 
 #### Request cURL
 
