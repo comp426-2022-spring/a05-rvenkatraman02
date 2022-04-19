@@ -40,8 +40,8 @@
     <div id="single" class="hidden">
       <h1>Flip a Coin!</h1>
       <button onclick="coinFlip()">Flip</button>
-      <h3>Result:</h3>
-      <img src="./assets/img/coin.png" id="unknowncoin">
+      <h3>Result: <span id="result"></span></h3>
+      <img src="./assets/img/coin.png" id="quarter">
     </div>
 
     <div id="multi" class="hidden">
@@ -63,9 +63,8 @@
             <th>Flip Result</th>
             <th>Coin Image</th>
           </tr>
-          <tr>
-            <!--- Will populate with results of flips -->
-          </tr>
+          <tbody id="fliprows">
+          </tbody>
         </table>
         <p id='heads'></p>
         <p id="tails"></p>
@@ -85,7 +84,7 @@
       <p id="coin_pic"></p>
       <p id="guess_result"></p>
     </div>
-    
+
 	<script src="main.js"></script>
   </body>
 </html>
