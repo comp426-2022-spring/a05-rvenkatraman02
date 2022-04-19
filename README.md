@@ -158,19 +158,26 @@ ETag: W...
 #### Request cURL
 
 ```
-
+curl http://localhost:5000/app/flip/call/heads
 ```
 
 #### Response body
 
 ```
-
+{"call":"heads","flip":"tails","result":"lose"}
 ```
 
 #### Response headers
 
 ```
-
+HTTP/1.1 200 OK
+Access-Control-Allow-Origin: *
+Connection: keep-alive
+Keep-Alive: timeout=5
+Content-Length: 47
+Content-Type: application/json; charset=utf-8
+Date: Tue, 19 Apr 2022 17:01:04 GMT
+...
 ```
 
 ### /app/flip/call/ (POST)
