@@ -32,18 +32,60 @@
       <button id="multinav">Flip multiple coins</button>
       <button id="guessnav">Guess the result</button>
     </nav>
+
     <div id="home">
-      
-    </div>    
+      <p>This is a coin flipping simulator. Press one of the three buttons to simulate different game styles.</p>
+    </div> 
+
     <div id="single" class="hidden">
-      
+      <h1>Flip a Coin!</h1>
+      <button onclick="coinFlip()">Flip</button>
+      <h3>Result:</h3>
+      <img src="./assets/img/coin.png" id="unknowncoin">
     </div>
+
     <div id="multi" class="hidden">
-      
+
+      <h1>Flip Multiple Coins!</h1>
+      <form id="coin_input">
+          <label for="number">
+            <strong>Enter the number of flips:</strong>
+          </label>
+          <input type="number" name="number" id="number" />
+          <br>
+          <input type="submit" value="Flip Coins!" />
+      </form>
+
+      <div id="resultsdata">
+        <table>
+          <tr>
+            <th>Flip #</th>
+            <th>Flip Result</th>
+            <th>Coin Image</th>
+          </tr>
+          <tr>
+            <!--- Will populate with results of flips -->
+          </tr>
+        </table>
+        <p id='heads'></p>
+        <p id="tails"></p>
+      </div>
+
     </div>
+
     <div id="guess" class="hidden">
       
+      <h1>Guess the Result of the Flip!</h1>
+      <button id="headsbutton">Heads</button>
+      <button id="tailsbutton">Tails</button>
+
+      <h3>Your Results:</h3>
+      <p id='call'></p>
+      <p id="actual_flip"></p>
+      <p id="coin_pic"></p>
+      <p id="guess_result"></p>
     </div>
+    
 	<script src="main.js"></script>
   </body>
 </html>
