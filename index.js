@@ -6,10 +6,6 @@ const db = require('./src/services/database.js')
 const morgan = require('morgan')
 const fs = require('fs')
 const cors = require('cors')
-app.use(cors())
-app.use(express.urlencoded({extended: true}))
-app.use(express.json())
-app.use(express.static('./public'))
 
 // Get Port
 const args = require("minimist")(process.argv.slice(2));
@@ -20,6 +16,10 @@ const server = app.listen(port, () => {
   console.log('App listening on port %PORT%'.replace('%PORT%',port));
 });
 
+app.use(cors())
+app.use(express.urlencoded({extended: true}))
+app.use(express.json())
+app.use(express.static('./public'))
 
 args["debug"] || false
 var debug = args.debug
