@@ -136,11 +136,6 @@ app.get('/app/flip/call/:guess(heads|tails)/', (req, res, next) => {
 //   res.status(200).json(flipACoin('tails'));
 // });
 
-app.use(function(req,res) {
-  res.status(404).end('Endpoint does not exist');
-  res.type('text/plain');
-});
-
 // Default response for any other request
 app.use(function(req,res){
     res.status(404).send('404 NOT FOUND');
