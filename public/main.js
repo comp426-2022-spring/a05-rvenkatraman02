@@ -73,7 +73,7 @@ function coinFlip() {
 		.then(function(result) {
 			console.log(result)
 				document.getElementById("result").innerHTML = result.flip
-				document.getElementById("quarter").setAttribute("src", "/public/assets/img/"+result.flip+".png")
+				document.getElementById("quarter").setAttribute("src", "/assets/img/"+result.flip+".png")
 				coin.disabled = true
 		})
 }
@@ -113,7 +113,7 @@ async function flipCoins(event) {
             row.appendChild(currResult)
             var currImage = document.createElement("td")
             var currImage2 = document.createElement("img")
-            currImage2.setAttribute("src", "/public/assets/img/"+currResult+".png")
+            currImage2.setAttribute("src", "/assets/img/"+currResult+".png")
             currImage.appendChild(currImage2)
             row.appendChild(currImage)
 
@@ -150,7 +150,7 @@ async function guessFlip(event) {
         console.log(flips)
         document.getElementById("call").innerHTML = "Your call: "+flips.call
         document.getElementById("actual_flip").innerHTML = "Coin landed on: "+flips.flip
-        document.getElementById("coin_pic").setAttribute("src", "/public/assets/img/"+result.flip+".png")
+        document.getElementById("coin_pic").setAttribute("src", "/assets/img/"+result.flip+".png")
         document.getElementById("guess_result").innerHTML = "Result: "+flips.result
     }
     catch (error) {
