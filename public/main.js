@@ -82,82 +82,75 @@ function coinFlip() {
 // Enter number and press button to activate coin flip series
 
 // Our flip many coins form
-const coins = document.getElementById("coin_input")
-// Add event listener for coins form
-coins.addEventListener("submit", flipCoins)
-// Create the submit handler
-async function flipCoins(event) {
-    event.preventDefault();
-    
-    const endpoint = "app/flip/coins/"
-    const url = document.baseURI+endpoint
+function flipCoins() {
+    // retrieve number of coins to flip
+    numberCoins = document.getElementById('numberFlips').value
 
-    const formEvent = event.currentTarget
+    fetch('http://localhost:5000/app/flip/coins', {
+        body: JSON.stringify({
+            'number': numberCoins
+        }),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        method: 'post'
+    })
+        .then(function (response) {
+            return response.json()
+        })
+        .then(function (flips) {
 
-    try {
-        const formData = new FormData(formEvent)
-        const flips = await sendFlips({ url, formData })
+            // Graphically display all results in the details table.
+            var flipResults = document.getElementById('fliprows')
+            flipResults.innerHTML = ""
+            for (var i = 0; i < flips.raw.length; i++) {
+                var row = document.createElement('tr')
+                var currFlip = document.createElement('td')
+                currFlip.innerHTML = i + 1
+                row.appendChild(currFlip)
+                var currResult = document.createElement('td')
+                currResult.innerHTML = flips.raw[i]
+                row.appendChild(currResult)
+                var currImage = document.createElement('td')
+                var currImage2 = document.createElement('img')
+                currImage2.setAttribute('src', 'assets/img/' + flips.raw[i] + '.png')
+                currImage2.setAttribute('class', 'smallcoin')
+                currImage.appendChild(currImage2)
+                row.appendChild(currImage)
 
-        console.log(flips)
+                flipResults.appendChild(row)
+            }
 
-        // Put each result in a table
-        var flipResults = document.getElementById('fliprows')
-        for (let i = 1; i <= flips.raw.length; i++) {
-            // creates a table row
-            var row = document.createElement("tr")
-            var currFlip = document.createElement("td")
-            currFlip.innerHTML = i
-            row.appendChild(currFlip)
-            var currResult = document.createElement("td")
-            currResult.innerHTML = result.raw[i]
-            row.appendChild(currResult)
-            var currImage = document.createElement("td")
-            var currImage2 = document.createElement("img")
-            currImage2.setAttribute("src", "/assets/img/"+currResult+".png")
-            currImage.appendChild(currImage2)
-            row.appendChild(currImage)
-
-            flipResults.appendChild(row)
-        }
-
-        document.getElementById("heads").innerHTML = "Heads: "+flips.summary.heads
-        document.getElementById("tails").innerHTML = "Tails: "+flips.summary.tails
-
-    } catch (error) {
-        console.log(error)
-    }
+            document.getElementById('multi_display').setAttribute('class', 'active')
+            document.getElementById('heads').innerHTML = flips.summary.heads
+            document.getElementById('tails').innerHTML = flips.summary.tails
+        })
 }
 
 // Guess a flip by clicking either heads or tails button
 
 // Our flip many coins form
-const guessflips = document.getElementById("headsbutton")
 // Add event listener for coins form
-guessflips.addEventListener("click", guessFlip)
-
-async function guessFlip(event) {
-    event.preventDefault();
-    
-    const endpoint = "app/flip/call/"
-    const url = document.baseURI+endpoint
-
-    const formEvent = event.currentTarget
-    
-    try {
-        const formData = new FormData(formEvent)
-        const flips = await sendFlips({ url, formData })
-
-        console.log(flips)
-        document.getElementById("call").innerHTML = "Your call: "+flips.call
-        document.getElementById("actual_flip").innerHTML = "Coin landed on: "+flips.flip
-        document.getElementById("coin_pic").setAttribute("src", "/assets/img/"+result.flip+".png")
-        document.getElementById("guess_result").innerHTML = "Result: "+flips.result
-    }
-    catch (error) {
-        console.log(error)
-    }
+function guessFlip(guess) {
+    fetch('http://localhost:5000/app/flip/call', {
+        body: JSON.stringify({
+            'guess': guess
+        }),
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        method: 'post'
+    })
+        .then(function (response) {
+            return response.json()
+        })
+        .then(function (flips) {
+            document.getElementById("call").innerHTML = "Your call: "+flips.call
+            document.getElementById("actual_flip").innerHTML = "Coin landed on: "+flips.flip
+            document.getElementById("coin_pic").setAttribute("src", "/assets/img/"+flips.flip+".png")
+            document.getElementById("guess_result").innerHTML = "Result: "+flips.result
+        })
 }
-
 
 // Create a data sender
 async function sendFlips({ url, formData }) {

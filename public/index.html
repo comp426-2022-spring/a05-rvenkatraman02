@@ -45,30 +45,46 @@
     </div>
 
     <div id="multi" class="hidden">
-
-      <h1>Flip Multiple Coins!</h1>
-      <form id="coin_input">
-          <label for="number">
-            <strong>Enter the number of flips:</strong>
-          </label>
-          <input type="number" name="number" id="number" />
-          <input type="submit" value="Flip Coins!" />
+      <h1>Flip Multiple Coins!</h1>  
+      <form action='javascript:void(0);'  onsubmit='flipCoins()'>
+        <label for="numberFlips">
+          <strong>Enter the number of flips:</strong>
+        </label>
+        <input type="number" name="numberFlips" id="numberFlips" />
+        <br>
+        <input type="submit" value="Flip Coins!"/>
       </form>
+      
+      <div id="multi_display" class="hidden">
 
-      <div id="resultsdata">
+        <h4>Result Details</h4>
         <table>
-          <tr>
-            <th>Flip #</th>
-            <th>Flip Result</th>
-            <th>Coin Image</th>
-          </tr>
+          <thead>
+            <tr>
+              <th scope="col">Flip #</th>
+              <th scope="col">Result</th>
+              <th scope="col">Image</th>
+            </tr>
+          </thead>
           <tbody id="fliprows">
           </tbody>
         </table>
-        <p id='heads'></p>
-        <p id="tails"></p>
-      </div>
 
+        <h5>Result Summary</h5>
+        <table>
+          <tbody>
+            <tr>
+              <td>Heads</td>
+              <td><span id="heads"></span></td>
+            </tr>
+            <tr>
+              <td>Tails</td>
+              <td><span id="tails"></span></td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
     </div>
 
     <div id="guess" class="hidden">
@@ -80,7 +96,7 @@
       <h3>Your Results:</h3>
       <p id='call'></p>
       <p id="actual_flip"></p>
-      <p id="coin_pic"></p>
+      <img id="coin_pic"></img>
       <p id="guess_result"></p>
     </div>
 
