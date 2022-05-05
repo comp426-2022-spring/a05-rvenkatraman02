@@ -32,18 +32,74 @@
       <button id="multinav">Flip multiple coins</button>
       <button id="guessnav">Guess the result</button>
     </nav>
+
     <div id="home">
-      
-    </div>    
+      <p>This is a coin flipping simulator. Press one of the three buttons to simulate different game styles.</p>
+    </div> 
+
     <div id="single" class="hidden">
-      
+      <h1>Flip a Coin!</h1>
+      <button onclick="coinFlip()">Flip</button>
+      <h3>Result: <span id="result"></span></h3>
+      <img src="./assets/img/coin.png" id="quarter">
     </div>
+
     <div id="multi" class="hidden">
+      <h1>Flip Multiple Coins!</h1>  
+      <form action='javascript:void(0);'  onsubmit='flipCoins()'>
+        <label for="numberFlips">
+          <strong>Enter the number of flips:</strong>
+        </label>
+        <input type="number" name="numberFlips" id="numberFlips" />
+        <br>
+        <input type="submit" value="Flip Coins!"/>
+      </form>
       
+      <div id="multi_display" class="hidden">
+
+        <h4>Result Details</h4>
+        <table>
+          <thead>
+            <tr>
+              <th scope="col">Flip #</th>
+              <th scope="col">Result</th>
+              <th scope="col">Image</th>
+            </tr>
+          </thead>
+          <tbody id="fliprows">
+          </tbody>
+        </table>
+
+        <h5>Result Summary</h5>
+        <table>
+          <tbody>
+            <tr>
+              <td>Heads</td>
+              <td><span id="heads"></span></td>
+            </tr>
+            <tr>
+              <td>Tails</td>
+              <td><span id="tails"></span></td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
     </div>
+
     <div id="guess" class="hidden">
       
+      <h1>Guess the Result of the Flip!</h1>
+      <button id="headsbutton" onclick="guessFlip('heads')">Heads</button>
+      <button id="tailsbutton" onclick="guessFlip('tails')">Tails</button>
+
+      <h3>Your Results:</h3>
+      <p id='call'></p>
+      <p id="actual_flip"></p>
+      <img id="coin_pic"></img>
+      <p id="guess_result"></p>
     </div>
+
 	<script src="main.js"></script>
   </body>
 </html>
